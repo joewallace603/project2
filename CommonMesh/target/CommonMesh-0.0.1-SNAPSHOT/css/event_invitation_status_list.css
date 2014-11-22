@@ -1,0 +1,73 @@
+
+	#tabs
+	{
+		font-family: "Lato", sans-serif;
+		font-size: 14px;
+	}
+	
+	.invitationList
+	{
+		list-style-type: none;
+	}
+	
+	.invitee
+	{
+		height: 50px;
+		margin: 5px;
+	}
+	
+	.inviteeImage
+	{
+		width: 50px;
+		float: left;
+	}
+
+	.inviteeName
+	{
+		margin-left: 60px;
+		font-family: "Lato", sans-serif;
+		font-size: 14px;
+	}
+	
+	.ui-widget-header
+	{
+		background: -ms-linear-gradient(top, #6aa3ff 0%, #3784ff 100%);
+	}
+	
+	#tabs-buttons .ui-tabs-nav 
+	{ 
+    	padding: 0em; 
+    	background: transparent; 
+    	border-width: 0px; 
+	}
+	 
+	#tabs-buttons .ui-tabs-nav li 
+	{ 
+    	position: static; 
+    	margin: 0px; 
+    	border-bottom: 1px solid #327e04 !important; 
+    	-moz-border-radius: 0px; 
+    	-webkit-border-radius: 0px; 
+    	border-radius: 0px; 
+	} 
+	
+	#tabs-buttons .ui-tabs-nav li:first-child 
+	{ 
+    	-moz-border-radius: 6px 0px 0px 6px; 
+    	-webkit-border-radius: 6px 0px 0px 6px; 
+    	border-radius: 6px 0px 0px 6px; 
+	} 
+	
+	#tabs-buttons .ui-tabs-nav li:last-child 
+	{ 
+    	-moz-border-radius: 0px 6px 6px 0px; 
+    	-webkit-border-radius: 0px 6px 6px 0px; 
+    	border-radius: 0px 6px 6px 0px; 
+	} 
+	
+	#tabs-buttons .ui-tabs-nav li.ui-tabs-selected 
+	{ 
+    	padding-bottom: 0px; 
+    	border-bottom: 1px solid #d4ccb0 !important; 
+	}
+

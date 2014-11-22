@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame 
+       Remove this if you use the .htaccess -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>Create Event</title>
+  <meta name="description" content="">
+  <meta name="author" content="Joe">
+
+  <meta name="viewport" content="width=device-width; initial-scale=1.0">
+
+  <!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="stylesheet" type="text/css" href="css/common_background.css">
+  <link rel="stylesheet" type="text/css" href="css/event_form.css">
+  <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+  
+  <link rel="stylesheet" type="text/css" href="css/datetimepicker.css" >
+  
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+  	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+  	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.3.1/jquery.cookie.min.js"></script>
+  	<script src="js/global.js"></script>
+  	<script src="js/datetimepicker.js"></script>
+  	<script src="http://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.7.0/mustache.min.js"></script>
+  	<script src="js/ajax-authorization-setup.js"></script>
+  	<script src="js/get-friends-html.js"></script>
+  	<script src="js/go-to-month-view.js"></script>
+  	<script src="js/get-url-param-value.js"></script>
+  	<script src="js/get-contacts-check-box-list.js"></script>
+  	
+  	<script>/*
+  		$(function() { 
+  			$('#datetimepicker').datetimepicker( {timepicker:true} );
+  		});*/
+  	</script>
+
+	<script>
+   		$( document ).ready (function( )
+   		{
+   			var eventId = getURLParamValue( "eventid" );
+   		
+	    	ajaxAuthorizationHeaderSetup( );
+	    	
+	    	// first get the event
+	    	var url = "rest/events/" + eventId + "/" + $.cookie( "username" );
+	    	
+	    	$.getJSON(url,
+				{ "_": $.now() },
+			  	function( data, status )
+			  	{ 
+			  	 	if( data.length > 0 )
+			  	 	{
+			  	 		//( "#datetimepicker" ).datetimepicker( "setDate", ( new Date( data[0].eventDate ) ) );
+			  	 		data[0].date = new Date( data[0].eventDate );
+			  	 		//get the edit form template
+			  	 		$.get( "templates/edit-event-form-template.html", 
+			  	 		function( templates )
+			  	 		{
+			  	 			var editEventFormTemplate = $( templates ).filter( "#editEventFormTemplate" ).html( );
+			  	 			var contactTemplate = $( templates ).filter( "#contactTemplate" ).html( );
+			  	 			
+			  	 			var editEventFormHtml = Mustache.to_html( editEventFormTemplate, data[0] );
+			  	 			
+			  	 			$("body").append( editEventFormHtml );
+			  	 			
+			  	 			getContactsCheckBoxList( contactTemplate, data[0] );
+			  	 			
+			  	 			/*
+			  	 			
+			  	 			var invitees = data[0].usersNotResponded.concat( data[0].usersGoing, data[0].usersTentative, data[0].usersDeclined );
+			  	 			
+			  	 			for( var i = 0; i < invitees.length; i++ )
+			  	 			{
+			  	 				var checkbox = document.getElementById( invitees[i] );
+								checkbox.setAttribute( "checked", "checked" );
+			  	 			}
+			  	 			*/
+			  	 			
+			  	 			$('#datetimepicker').datetimepicker( {timepicker:true} );
+			  	 			
+			  	 		});
+			  	 		
+			  	 		
+			  	 	}
+				}
+			);
+	    	
+			
+   		});
+   	</script>
+	
+  
+  <script>
+  	function updateEvent( )
+  	{
+  		var updatedEvent = new Object( );
+  		
+  		var contactArray = $.map( $( "input:checkbox:checked" ), function( checkbox ,i ) 
+  		{
+    		return checkbox.value;
+		});
+
+  		console.log( contactArray );
+  		updatedEvent.invitedContacts = contactArray;
+  		
+  		var forms = document.getElementsByTagName( "form" );
+  		updatedEvent.eventId = forms[0].id;
+  		
+  		updatedEvent.eventCreateDate = new Date( );
+  		updatedEvent.title = document.getElementById("title").value;
+  		updatedEvent.eventImageName = document.getElementById("imageName").value;
+  		var eventDate = new Date( document.getElementById( "datetimepicker").value );
+  		updatedEvent.eventDate = eventDate.getTime( );
+  		var duration = document.getElementById("duration");
+  		updatedEvent.eventDuration = duration.options[duration.selectedIndex].value;
+  		updatedEvent.location = document.getElementById("location").value;
+  		updatedEvent.description = document.getElementById("desc").value;
+  		updatedEvent.creatorId = $.cookie("username");
+  		
+  		jQuery.ajax ({
+			    url: "rest/events",
+			    type: "PUT",
+			    data: JSON.stringify( updatedEvent ),
+			    contentType: "application/json; charset=utf-8",
+			    success: function( ){ history.go( -1 ); },
+			    error: function( response, textStatus, errorStatus ){ alert("Update Event Failed:  " + errorStatus + " - " + response.responseText );}
+			    });
+  	}
+  	</script>
+</head>
+<body>
+</body>
+</html>

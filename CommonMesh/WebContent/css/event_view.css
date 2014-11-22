@@ -1,0 +1,164 @@
+		
+		
+		a:link {text-decoration:none;}
+ 		a:visited {text-decoration:none;}
+ 		a:hover {text-decoration:none;}
+ 		a:active {text-decoration:none;}
+ 		
+ 		.invitation
+ 		{
+ 			color: black;
+ 		}
+ 		
+ 		#edit
+ 		{
+ 			display: none;
+ 		}
+ 		
+ 		#dateTimeAlert
+ 		{
+ 			color: red;
+ 			display: none;
+ 		}
+ 		
+ 		#locationAlert
+ 		{
+ 			color: red;
+ 			display: none;
+ 		}
+		
+		#responseForm
+		{
+		/*	border-style: solid;
+			border-width: 1px;
+			border-color: grey; */
+			margin-bottom:25px;
+			height:40px;
+			width:500px;
+			margin-left:200px;
+		}
+
+		#responseForm input
+		{
+			margin:5px 24px;
+			
+		}
+		#eventView 
+		{
+			max-height:700px;
+			width:960px;
+			margin:auto;
+			margin-top: 25px;
+			border-radius: 5px;
+			border-style: solid;
+			border-width: 1px;
+			border-color: #D8D8D8;
+			background-color:white;
+			/*font-family: Verdana;*/
+			font-size: 14px;
+		}
+		
+		#eventTitle
+		{
+			text-align: center;
+			color: #6AA3FF;
+			font-size: 30px;
+			
+		}
+
+		#imageDiv
+		{
+			float:left;
+			margin:15px;
+		}
+
+		#image
+		{
+		
+			width:150px;
+			border-width: 10px;
+			border-style: solid;
+			border-radius: 5px;
+			/*box-shadow: 0px 0px 8px 0px;*/
+		}
+		
+
+		#detail
+		{
+			display: inline;
+			margin-left:25px;
+			margin-top:0px;
+		}
+
+		#description
+		{
+			max-height:75px;
+			height: auto
+			width:500px;
+			margin-left:200px;
+			overflow:auto;
+		}
+		
+		#description p
+		{
+			margin-top: 0px;
+			margin-right: 60px;
+		}
+
+		#eventStatus
+		{
+		/*	border-style:solid;
+			border-width:2px;
+			border-color:grey;*/ 
+			height:50px;
+			width:500px;
+			margin-left:200px;
+			margin-top:10px;
+		}
+
+		#eventStatus p
+		{
+			display:inline;
+			margin:50px;
+		}
+
+		#comments
+		{
+			border-style:solid;
+			border-width:1px;
+			border-color:#d8d8d8;
+			height:175px;
+			width:500px;
+			margin-left:200px;
+			margin-top:10px;
+			overflow: auto;
+		}
+		#postComment
+		{
+			/*border-style:solid;
+			border-width:1px;
+			border-color:gray;*/
+			height:50px;
+			width:700px;
+			margin-left:200px;
+			margin-top:25px;
+		}
+
+		#commentText
+		{
+			border: 0px;
+		}
+		
+		.commentPostBox
+		{
+			width: 500px;
+			border-right-color: black;
+			border-bottom-color: black;
+		}
+		
+		#close
+		{
+			float: right;
+			font-size: 14px;
+			padding: 10px;
+		}

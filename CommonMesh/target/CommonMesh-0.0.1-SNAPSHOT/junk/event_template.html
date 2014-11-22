@@ -1,0 +1,55 @@
+
+
+<script id="eventTableTemplate" type="text/template">
+	<table class="eventTable">
+		<tr>
+			<td rowspan="3">
+				<a target="_blank" title="Enlarge picture" href="file:///C:/apps/images/bike_team.bmp">
+					<img border="0" src="C:/apps/images/bike_team.bmp" alt="event image" width="75" height="75">
+				</a>
+			</td>
+			<td class="eventTableTitle" colspan="3" title={{desc}}>
+				<a href="file:///C:/workspace/MyFirstWebProject/a_event_view.html">{{title}}</a>
+			</td>
+			<td class="eventResponseTable" rowspan="3">
+				<table class="responseTable">
+			    	<tr>
+			    		<td colspan="2" class="statusImage">
+			    			<img src="C:/apps/images/have_not_responded.bmp" alt="status image" width="30" height="30" title="You have not responded to this invitation.">
+			    		</td>
+			    	</tr>
+			    	<tr>
+			    		<td colspan="2">
+			    			<a class="respondLink" href="file:///c:/workspace/MyFirstWebProject/a_event_view.html">respond</a>
+			    		</td>
+			    	</tr>
+			    	<tr>
+			    		<td>
+			    			<img src="C:/apps/images/reminder_na.bmp" alt="status image" width="20" height="20" title="No reminder is set.">
+			    		</td>
+			    		<td>
+			    			<img src="C:/apps/images/delete.bmp" alt="status image" width="10" height="10" title="Delete this event.">
+			    		</td>
+			    	</tr>
+			    </table>
+			</td>
+		</tr>
+		<tr>
+			<td class="eventTable">
+				<a href="file:///c:/workspace/MyFirstWebProject/a_event_view.html" title="View comments"><small><b>{{numberOfComments}} comments</b></small></a>
+			</td>
+			<td class="eventTable">
+				<a href="file:///c:/workspace/MyFirstWebProject/a_event_view.html" title={{going.toString()}}><small><b>{{going.length}} going</b></small></a>
+			</td>
+			<td>
+				<a href="file:///c:/workspace/MyFirstWebProject/a_event_view.html" title="Fabio, Rick, Steve, Gene, Tim, Scott, Ralf"><small><b>{{invited.length}} invited</b></small></a>
+			</td>
+		</tr>
+		<tr>
+			<td class="eventTableComment" colspan="3">
+				<textarea rows="1" cols="40" placeholder="Make a comment...">Make a comment...
+				</textarea>
+			</td>
+		</tr>
+	</table>
+</script>

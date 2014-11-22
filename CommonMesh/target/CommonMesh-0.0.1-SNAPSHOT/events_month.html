@@ -1,0 +1,158 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+			<title>Month Events</title>
+			
+	<link rel="stylesheet" type="text/css" href="css/month_view.css">
+	<link rel="stylesheet" type="text/css" href="css/common_background.css">
+	<link rel="stylesheet" type="text/css" href="css/menu_navigator.css">
+    <link rel="stylesheet" type="text/css" href="css/menu_bar.css">
+    <link rel="stylesheet" type="text/css" href="css/event_form.css">
+    <link rel="stylesheet" type="text/css" href="css/generic_overlay.css">
+  	<link rel="stylesheet" type="text/css" href="css/datetimepicker.css">
+  	<link rel="stylesheet" type="text/css" href="css/page_arrow.css">
+    
+		
+  	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+  	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.3.1/jquery.cookie.min.js"></script>
+  	<script src="http://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.7.0/mustache.min.js"></script>
+	<script src="js/global.js"></script>
+  	<script src="js/jquery-timeago.js"></script>
+  	<script src="js/get-comments.js"></script>
+  	<script src="js/create-comment.js"></script>
+  	<script src="js/generate-days-of-month.js"></script>
+  	<script src="js/shift-month.js"></script>
+  	<script src="js/ajax-authorization-setup.js"></script>
+  	<script src="js/go-to-create-event-view.js"></script>
+  	<script src="js/get-user-event-status-color.js"></script>
+  	<script src="js/get-day-of-week.js"></script>
+  	<script src="js/insert-create-event-form-into-overlay.js"></script>
+  	<script src="js/datetimepicker.js"></script>
+  	<script src="js/create-event.js"></script>
+  	<script src="js/go-to-month-view.js"></script>
+	<script src="js/go-to-week-view.js"></script>
+	<script src="js/go-to-settings-view.js"></script>
+	<script src="js/detectmobilebrowser.js"></script>
+  	
+
+   		<script>
+			function initMenu() {
+				var block = $(".day");
+					block.addClass("clickable");
+					block.hover(function(){window.status = $(this);}, function(){window.status = "";});
+				
+				$('.open').hide();
+				block.click(
+					function() { 
+						$(this).parents('div:eq(0)').find('.open').slideToggle('fast');	
+					}
+				);}
+		//	$(document).ready(function() {initMenu();});
+   		</script>	
+   		
+   		<script>
+   			$( document ).ready (function( )
+   			{
+   				$( "#nextTimeRange" ).click( function( ){shiftMonth( true );});
+   				$( "#nextTimeRange2" ).click( function( ){shiftMonth( true );});
+	    
+	    		$( "#previousTimeRange" ).click( function( ){shiftMonth( false );});
+	    		$( "#previousTimeRange2" ).click( function( ){shiftMonth( false );});
+	    		
+	    		ajaxAuthorizationHeaderSetup( );
+	    		
+	    		getEventsForDisplayMonth( );
+   			});
+   		</script>
+   		
+   	<script id="monthYearTemplate" type="text/template">
+   		<div id="calheader">
+			<p id="pageTitle">{{monthName}} {{year}}</p>
+		</div>
+	</script>
+	
+
+	<script id="dayOfMonthTemplate" type="text/template">
+		<div class="{{{classes}}}">
+			<div class="daybar"><p>{{displayDate}}</p></div>
+			<div class="eventImageList">
+				{{{eventListHtml}}}
+			</div>	
+			<div class="open">
+				{{{eventListOpenHtml}}}
+			</div>	
+		</div>
+	</script>
+	
+	</head>
+	<body>
+		<div id='cssmenu'>
+				<ul>
+   					<li class="leftMenuBarItem" id="settings"><a title="Go to settings." id="settingsButton" onclick="goToSettingsView( )"><img id="settingsImage" src="img/config.bmp"></a></li>
+   					<li class="leftMenuBarItem"><img id="logo" src="img/commonmesh1.bmp"></li>
+   					 
+   					<li class="last rightMenuBarItem"><a onclick="goToWeekView( )"><span>Week</span></a></li>
+   					<li class="rightMenuBarItem"><a onclick="goToMonthView( )"><span>Month</span></a></li>
+   					<li class="rightMenuBarItem"><a title="Create new event." onclick="insertCreateEventFormIntoOverlay( )"><span>+</span></a></li>
+   					<li class='rightMenuBarItem'><a title="Go to next event." id='nextTimeRange' href='#'><span>&#62</span></a></li>
+   					<li class="rightMenuBarItem"><a title="Go to previous event." id='previousTimeRange' href='#'><span>&#60</span></a></li>
+   				</ul>
+	</div>
+	<!--
+		<div id="main">
+		
+		<div id='cssmenu'>
+				<ul>
+   					<li class="leftMenuBarItem"><a title="Go to previous month." id='previousTimeRange' href='#'><span>&#60</span></a></li>
+   					<li class="leftMenuBarItem"><img src="img/commonmesh1.bmp"></li>
+   					<li class='last rightMenuBarItem'><a title="Go to next month." id='nextTimeRange' href='#'><span>&#62</span></a></li>
+   					<li class="rightMenuBarItem"><a title="Create new event." onclick="insertCreateEventFormIntoOverlay( )"><span>+</span></a></li>
+   					<li class="rightMenuBarItem"><a onclick="goToWeekView( )"><span>Week</span></a></li>
+   					<li class="rightMenuBarItem"><a onclick="goToMonthView( )"><span>Month</span></a></li>
+   				</ul>
+		</div>
+		-->
+		
+		<div id="overlay">
+		</div>
+	
+		<div id="fade">
+		</div>
+		<!--
+		<div id="leftArrow">
+			<a title="Go to previous month." id='previousTimeRange' href='#'><span>&#60</span></a>
+		</div>
+		
+		<div id="rightArrow">
+			<a title="Go to next month." id='nextTimeRange' href='#'><span>&#62</span></a>
+		</div>
+		-->
+			
+		<div id="calendar">					
+			<div id="calcontainer">
+			<!------- month/year goes here ----->
+				<div id="daysweek">
+					<div class="dayweek"><p>Sunday</p></div>
+					<div class="dayweek"><p>Monday</p></div>
+					<div class="dayweek"><p>Tuesday</p></div>
+					<div class="dayweek"><p>Wednesday</p></div>
+					<div class="dayweek"><p>Thursday</p></div>
+					<div class="dayweek"><p>Friday</p></div>
+					<div class="dayweek lastDayOfWeek"><p>Saturday</p></div>
+				</div>
+				<div id="daysmonth">
+                	<!-------- Days/Weeks go here ------------->
+				</div>				
+			</div>					
+			<div id="calcat">
+				<div class="caldot blue"></div><p>Have Not responded</p>
+				<div class="caldot gray"></div><p>Declined</p>
+				<div class="caldot yellow"></div><p>Tentative</p>
+				<div class="caldot green"></div><p>Accepted</p>
+				<div class="caldot red"></div><p>Schedule Changed</p>
+			</div>				
+		</div>	
+	</div>
+	
+	</body>
+</html>

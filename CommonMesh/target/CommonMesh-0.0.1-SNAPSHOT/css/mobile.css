@@ -1,0 +1,18 @@
+
+#joinTitle
+{
+	font-weight: 900;
+	
+}
+
+#joinText
+{
+	text-align: center;
+}
+
+.ui-btn-active
+{
+	color: blue !important;
+	background: none !important;
+	background-color: white !important;
+}

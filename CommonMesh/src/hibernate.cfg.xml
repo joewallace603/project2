@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+                                         "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+ <session-factory name="myHibernateSession">
+  <property name="hibernate.connection.driver_class">org.gjt.mm.mysql.Driver</property>
+  <property name="hibernate.connection.password">db4Me88</property>
+  <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/myapp</property>
+  <property name="hibernate.connection.username">sqladmin</property>
+  <property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
+  <mapping class="com.jpw.dto.EventUserStatus"/>
+  <mapping class="com.jpw.dto.Event"/>
+  <mapping class="com.jpw.dto.User"/>
+  <mapping class="com.jpw.dto.EventComment"/>
+ </session-factory>
+</hibernate-configuration>

@@ -1,0 +1,149 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+			<title>WuzUp Month</title>
+			
+	<link rel="stylesheet" type="text/css" href="css/month_view.css">
+	<link rel="stylesheet" type="text/css" href="css/common_background.css">
+
+		
+  	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+  	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.3.1/jquery.cookie.min.js"></script>
+  	<script src="http://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.7.0/mustache.min.js"></script>
+  	<script>
+		$.cookies.setOptions( {path: '/' });
+	</script>
+  	<script src="js/jquery-timeago.js"></script>
+  	<script src="js/get-comments.js"></script>
+  	<script src="js/create-comment.js"></script>
+  	<script src="js/generate-days-of-month.js"></script>
+
+   		<script>
+			function initMenu() {
+				var block = $(".day");
+					block.addClass("clickable");
+					block.hover(function(){window.status = $(this)}, function(){window.status = ""});
+				
+				$('.open').hide();
+				block.click(
+					function() { 
+						$(this).parents('div:eq(0)').find('.open').slideToggle('fast');	
+					}
+				);}
+			//$(document).ready(function() {initMenu();});
+   		</script>	
+   		
+   		
+   	<!---------------------------------  adding templates ------------->
+   		
+   	<script id="monthYearTemplate" type="text/template">
+   		<div id="calheader">
+			<h2>{{monthName}} {{year}}</h2>
+		</div>
+	</script>
+	
+	
+	<script id="dayOfMonthTemplate" type="text/template">
+		<div class="day">
+			<div class="daybar"><p>{{displayDate}}</p></div>
+			<div class="eventImageList">
+				<ul>
+					<li class="yellow"></li>
+					<li class="green"></li>
+				</ul>
+			</div>	
+			<div class="open">
+				<ul>
+					<li class="yellow l2 a9"><p>09:00 History: examination</p></li>
+					<li class="green l2 a9"><p>19:00 Camp meeting</p></li>
+				</ul>
+			</div>	
+		</div>
+	</script>
+	
+	<script id="lastDayOfWeekTemplate" type="text/template">
+		<div class="day lastDayOfWeek">
+			<div class="daybar"><p>{{displayDate}}</p></div>
+			<div class="eventImageList">
+				<ul>
+					<li class="yellow"></li>
+					<li class="green"></li>
+				</ul>
+			</div>
+			<div class="open">
+				<ul>
+					<li class="yellow l2 a9"><p>09:00 History: examination</p></li>
+					<li class="green l2 a9"><p>19:00 Camp meeting</p></li>
+				</ul>
+			</div>		
+		</div>					
+	</script>	
+	
+	<script id="todayTemplate" type="text/template">
+		<div class="day today">
+			<div class="daybar"><p>{{displayDate}}</p></div>
+			<div class="eventImageList">
+				<ul>
+					<li class="yellow"></li>
+					<li class="green"></li>
+				</ul>
+			</div>
+			<div class="open">
+				<ul>
+					<li class="yellow l2 a9"><p>09:00 History: examination</p></li>
+					<li class="green l2 a9"><p>19:00 Camp meeting</p></li>
+				</ul>
+			</div>		
+		</div>					
+	</script>	
+	
+	<script id="todayLastDayOfWeekTemplate" type="text/template">
+		<div class="day today lastDayOfWeek">
+			<div class="daybar"><p>{{displayDate}}</p></div>
+			<div class="eventImageList">
+				<ul>
+					<li class="yellow"></li>
+					<li class="green"></li>
+				</ul>
+			</div>
+			<div class="open">
+				<ul>
+					<li class="yellow l2 a9"><p>09:00 History: examination</p></li>
+					<li class="green l2 a9"><p>19:00 Camp meeting</p></li>
+				</ul>
+			</div>		
+		</div>					
+	</script>	
+	
+	<script>
+		$( document ).ready( getEventsForDisplayMonth );
+	</script>
+	
+	</head>
+	<body>
+		<div id="calendar">					
+			<div id="calcontainer">
+			<!------- month/year goes here ----->
+				<div id="daysweek">
+					<div class="dayweek"><p>Sunday</p></div>
+					<div class="dayweek"><p>Monday</p></div>
+					<div class="dayweek"><p>Tuesday</p></div>
+					<div class="dayweek"><p>Wednesday</p></div>
+					<div class="dayweek"><p>Thursday</p></div>
+					<div class="dayweek"><p>Friday</p></div>
+					<div class="dayweek lastDayOfWeek"><p>Saturday</p></div>
+				</div>
+				<div id="daysmonth">
+                	<!-------- Days/Weeks go here ------------->
+				</div>				
+			</div>					
+			<div id="calcat">
+				<div class="caldot blue"></div><p>Have Not responded</p>
+				<div class="caldot gray"></div><p>Declined</p>
+				<div class="caldot yellow"></div><p>Tentative</p>
+				<div class="caldot green"></div><p>Accepted</p>
+				<div class="caldot red"></div><p>Schedule Changed</p>
+			</div>				
+		</div>	
+	</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html ng-app="logonApp">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+
+	
+	<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
+	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.2/jquery.mobile.css" />
+	<link rel="stylesheet" href="http://demos.jquerymobile.com/1.4.0/theme-classic/theme-classic.css" />
+	<link rel="stylesheet" href="css/mobile.css"/>
+	
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+	<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.2/jquery.mobile.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.3.1/jquery.cookie.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-cookies.min.js"></script>
+	<script src="js/global.js"></script>
+	<script src="js/login.js"></script>
+	<script src="js/go-to-month-view.js"></script>
+	<script src="js/go-to-week-view.js"></script>
+	<script src="js/ajax-authorization-setup.js"></script>
+	<script src="js/datetimepicker.js"></script>
+	
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+	
+	<script>
+		$(function() {
+   	 		$( "#birthDatePicker" ).datepicker( {changeYear: true, yearRange:"1910:2014"});
+  		});
+  	</script>
+	
+	<script>
+		var logonApp = angular.module( "logonApp", ["ngCookies"] );
+		
+		var model = new Object();
+		
+		logonApp.controller( "logonCtrl", function( $scope, $http, $rootScope, $cookieStore )
+		{
+			$scope.logon = model;
+			var url = "rest/admin/users";
+	
+			var config = { headers: { "authorization": "Basic " + btoa("dummyName" + ":" + "dummyPassword" )}};
+			
+			$scope.submitJoinForm = function( )
+			{
+				$scope.logon.dateOfBirth = $("#birthDatePicker").datepicker( 'getDate' );
+				
+				alert("dob = " + $scope.logon.dateOfBirth );
+				
+				$http.post( url, $scope.logon, config )
+					.success( function()
+					{ 
+						alert("success!");
+						
+						//cookieCtrl( );
+						alert( "start cookie control..." );
+						
+						$rootScope.username = $scope.logon.userId;
+						$cookieStore.put( "username", $rootScope.username );
+						
+						$rootScope.password = $scope.logon.password;
+						$cookieStore.put( "password", $rootScope.password );
+						
+						alert( "username = " + $cookieStore.get( "username" ));
+						alert( "password = " + $cookieStore.get( "password" ));
+						
+						alert("done with cookie about to call month view" );
+						
+			    		goToMonthView( );
+					})
+					.error( function( stuff ){ alert("error"); alert("error = " + stuff )});
+			};	
+		});
+	</script>
+	
+	
+	
+</head>
+<body ng-controller="logonCtrl">
+	<div data-role="page" id="logonPage" data-theme="b">
+		<div data-role="header" data-position="fixed" data-theme="b">
+			<h1>CommonMesh</h1>
+		</div>
+		<div data-role="content" id="logonContent">
+		
+			<form id="logon" action="javascript:login( )">
+				<label for="username">Username:</label>
+				<input type="email" required id="username" data-clear-btn="true">
+				<label for="password">Password:</label>
+				<input type="password" required id="password" data-clear-btn="true">
+				<input type="submit" value="Log In">
+			</form>
+			<br>
+			<div id="joinText">
+				<p><span id="joinTitle">Join CommonMesh</span></p>
+			</div>
+			<div id="appFeatures">
+				<ul>
+					<li>Create events</li>
+					<li>Select a picuture to designate event</li>
+					<li>Picture marks event in calendar</li>
+					<li>Invite others from contact list</li>
+					<li>Event appears in their calendars</li>
+					<li>Each event has a comment thread</li>
+					<li>Track each events invitation status</li>
+					<li>Get notified of event time or location changes</li>
+				</ul>
+			</div>
+				
+			<a href="#joinPage" data-role="button">Join Today!</a>
+		</div>
+	</div>
+	
+	<div data-role="page" id="joinPage" data-theme="b">
+		<div data-role="header" data-theme="b">
+			<h1>CommonMesh</h1>
+		</div>
+		<div data-role="content">
+		<!-- <form id="createUser" action="javascript:createUser( )"> -->
+			<form id="createUser">
+			<label for="newUsername">Username:</label>
+			<input type="email" ng-model="logon.userId" required id="newUsername" data-clear-btn="true">
+			<label for="password">Password:</label>
+			<input type="password" ng-model="logon.password" required id="password" data-clear-btn="true">
+			<label for="firstName">First Name:</label>
+			<input type="text" ng-model="logon.firstName" required id="firstName" data-clear-btn="true">
+			<label for="lastName">Last Name:</label>
+			<input type="text" ng-model="logon.lastName" required id="lastName" data-clear-btn="true">
+			<label for="userImageName">Profile Picture:</label>
+			<input type="text" ng-model="logon.userImageName" id="userImageName" data-clear-btn="true">
+			<label for="birthDatePicker">Date of Birth:</label>
+			<input class="text" required type="text" id="birthDatePicker">
+			
+			<fieldset data-role="controlgroup">
+				<legend>Choose gender:</legend>
+				<label for="male">Male</label>
+				<input type="radio" ng-model="logon.isMale" required id="male" name="gender" value="true" data-mini="true">
+				<label for="female">Female</label>
+				<input type="radio" required id="female" name="gender" value="false" data-mini="true">
+			</fieldset>
+			<label for="zipCode">Zip Code:</label>
+			<input type="zip" ng-model="logon.zipCode" required id="zipCode" data-clear-btn="true">
+			<input type="submit" value="Join" ng-click="submitJoinForm()">
+		</form>
+		</div>
+	</div>
+	
+
+</body>
+</html>

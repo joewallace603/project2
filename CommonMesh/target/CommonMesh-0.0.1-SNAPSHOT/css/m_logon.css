@@ -1,0 +1,128 @@
+form
+  	{
+  		margin:auto;
+  		/*background: -webkit-gradient(linear, bottom, left 175px, from(#CCCCCC), to(#EEEEEE));*/
+		/*background: -moz-linear-gradient(bottom, #CCCCCC, #EEEEEE 175px);*/
+		position:relative;
+		width:600px;
+		/*font-family: Tahoma, Geneva, sans-serif; 
+		font-size: 14px;
+		font-style: italic;
+		line-height: 24px;
+		font-weight: bold; */
+		/*color: #09C;*/
+		text-decoration: none;
+		-webkit-border-radius: 5px;
+		-moz-border-radius: 5px;
+		border-radius: 5px;
+		/*border: 1px solid #999;*/
+	/*	border: inset 2px solid #333;
+	/*	-webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+		-moz-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+		box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3); */
+
+  	}
+  	
+  	form#logon
+  	{
+  		width: 960px;
+  		height:50px;
+  	}
+  	
+  	form#createUser
+  	{
+  		width: 960px;
+  		height:480px;
+  	}
+  	
+  	input   
+  	{
+		/*border: 1px solid #999;*/
+		height: 25px;
+		/*-webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+		-moz-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+		box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3); */
+	}
+	
+	input.text
+	{
+		width:375px;
+		display:block;
+	}
+	
+	input.logon
+	{
+		display:inline;
+		width:220px;
+		margin: 10px 50px 10px 10px;
+	}
+
+
+	/*
+	input.button
+	{
+		width:100px;
+		background:#6AA3FF;
+		color:#fff;
+		height:30px;
+		-webkit-border-radius: 5px;
+		-moz-border-radius: 5px;
+		border-radius: 5px;
+		border: 1p solid #999;
+	}
+	*/
+	
+	#errorMessage
+	{
+		display: none;
+		font-size: 14px;
+		color: red;
+	}
+	
+	span
+	{
+		margin-left: 20px;
+	}
+	
+	input#submitButton
+	{
+		float: right;
+		margin: 10px 100px;
+	}
+	
+	.inputArea
+	{
+		width: 960px;
+		height: 40px;
+	}
+
+	.inputArea span
+	{
+		float: left;
+		text-align: right;
+		width: 300px;
+	}
+
+	.inputArea input
+	{
+		float: right;
+		margin-right: 225px;
+	}
+	
+	p
+	{
+		text-align: center;
+		color: #6aa3ff;
+		font-size: 30px;
+		margin: 10px 5px 20px;
+	}
+	
+	input#male
+	{
+		margin-right: 590px;
+	}
+	
+	input#female
+	{
+		margin-right: 590px;
+	}

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+
+	<script id="closeOverlayTemplate" type="text/template">
+		<a onclick="document.getElementById('overlay').style.display='none';
+ 					document.getElementById('fade').style.display='none'"
+ 					href="#" >
+			<img src="img/delete.bmp" id="closeOverLay" title="Close" width="15" height="15">
+		</a>
+ 	</script>
+
+	<script id="contactTemplate" type="text/template">
+		<div class="item">
+			<input type="checkbox" id="{{userId}}" value="{{userId}}">
+			<label for="{{userId}}">{{firstName}} {{lastName}}</label>
+		</div>
+	</script>
+	
+	<script id="createEventFormTemplate" type="text/template">
+		<form id="eventForm" action="javascript:createEvent( )" >
+			<div>
+				<p id="pageTitle">Create Event</p>
+				<div class="inputArea">
+					<div class="inputLabel">
+					Title
+					</div>
+					<input class="wideInput" id="title" type="text">
+				</div>
+				<div class="inputArea">
+					<div class="inputLabel">
+					Image
+					</div>
+					<input class="wideInput" id="imageName" type="text">
+				</div>
+				<div class="inputArea">
+					<div class="inputLabel">
+						Location
+					</div>
+					<input class="wideInput" id="location" type="text">
+				</div>
+				<div class="inputArea">
+					<div class="inputLabel">
+					Date
+					</div>
+					<input class="wideInput" id="datetimepicker" type="text">
+				</div>
+				<div class="inputArea">
+					<div class="inputLabel">
+					Duration
+					</div>
+					<select id="duration">
+						<option value="1" selected>1</option>
+						<option value="2">2</option>
+						<option value="3" >3</option>
+						<option value="4" >4</option>
+						<option value="5" >5</option>
+						<option value="6" >6</option>
+						<option value="7" >7</option>
+						<option value="8" >8</option>
+					</select>
+				</div>
+				<div class="inputArea" id="descArea">
+					<div class="inputLabel">
+					Description
+					</div>
+					<textarea class="wideInput" id="desc"></textarea>
+				</div>
+				<div class="inputArea" id="contactsArea">
+					
+					<div class="inputLabel">
+					Invite Contacts
+					</div>
+					<fieldset id="contactList">
+					</fieldset>
+				</div>
+				<div id="buttons">
+					<div id="submit">
+						<input type="submit" class="button" value="Save" id="create">
+					</div>
+					<div id="cancelArea">
+						<input type="button" class="button" id="cancel" value="Cancel" onclick=
+							"document.getElementById('overlay').style.display='none';
+ 							 document.getElementById('fade').style.display='none'"
+					</div>
+				</div>
+			</div>
+		</form>
+	</script>
+
+</head>
+<body>
+</body>
+</html>

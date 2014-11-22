@@ -1,0 +1,213 @@
+  	#eventForm
+  	{
+  		width: 600px;
+  		height: = 600px;
+  		margin: auto;
+  		border: 0px;
+  		padding-top: 20px;
+  		/*margin:auto;*/
+  		/*background: -webkit-gradient(linear, bottom, left 175px, from(#CCCCCC), to(#EEEEEE));*/
+		/*background: -moz-linear-gradient(bottom, #CCCCCC, #EEEEEE 175px);*/
+		/*
+		position:relative;
+		width:760px;
+		font-family: Tahoma, Geneva, sans-serif;
+		font-size: 14px;
+		*/
+		/*font-style: italic;*/
+		/*line-height: 24px;*/
+		/*font-weight: bold;
+		/*color: #09C;*/
+		/*
+		text-decoration: none;
+		-webkit-border-radius: 10px;
+		-moz-border-radius: 10px;
+		border-radius: 10px;
+		padding:10px 60px;
+		border: 1px solid #999;
+		border: inset 2px solid #333;
+		*/
+		/*
+		-webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+		-moz-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+		box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);*/
+		/*
+		padding-bottom: 25px;
+		max-height: 750px;
+		overflow: hidden;
+		*/
+
+  	}
+  	
+  	#overlay
+  	{
+  		border: 0px;
+  	}
+  	
+  	input [type=checkbox]
+  	{
+  		float: left;
+  	}
+  	
+  	/*
+  	h2
+  	{
+  		text-align: center;
+  	}
+  	*/
+  	
+  	.inputArea
+  	{
+  		/*margin: 5px 50px;*/
+  		padding: 10px 25px;
+  	}
+  	
+  	.inputLabel
+  	{
+  		display: inline;
+  	}
+  	
+  	#desc
+  	{
+  		height: 100px;
+  		width: 400px;
+  		float: right;
+  	}
+  	
+  	#descArea
+  	{
+  		height: 100px;
+  	}
+  	
+  	#contactsArea
+  	{
+  		height: 120px;
+  		overflow: auto;
+  	}
+  	
+  #friendList
+  {
+  	float: right;
+  	width: 450px;
+  	max-height: 250px;
+  	overflow: auto;
+  }
+  	
+  	#buttons
+	{
+		padding: 20px 25px;
+		height: 30px;
+	}
+	
+	#submit
+	{
+		display: inline;
+		float: left;
+	}
+	
+	#cancelArea
+	{
+		display: inline;
+		float: right;
+	}
+	
+  	input.wideInput 
+  	{
+		width:400px;
+		float: right;
+	/*	display: block;*/
+		border: 1px solid #999;
+		height: 25px;
+	/*	-webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+		-moz-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+		box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3); */
+	}
+	
+	/*
+	textarea#desc 
+	{
+		width:375px;
+		height:100px;
+		display:block;
+	} */
+	
+	textarea.Description 
+	{
+		display:inline;
+	}
+		
+	fieldset 
+	{
+    	width: 400px;
+    	height: 140px;
+    	overflow: auto;
+		background-color: white;
+		border: 0px;
+		float: right;
+		padding: 0px;
+    	
+	}
+	
+	/*
+	label 
+	{
+    	float: left;
+	}
+	*/
+	
+	.item 
+	{
+	    float: left;
+	    width: 175px;
+	}
+	
+	input.item
+	{
+		display: inline;
+	}
+	
+	/*
+	label.item
+	{
+		float: left;
+	}
+	*/
+		
+	input#create
+	{
+		/*
+		width:100px;
+		position:absolute;
+		left:20px;
+		bottom:20px;
+		background:#09C;
+		color:#fff;
+		font-family: Tahoma, Geneva, sans-serif;
+		height:30px;
+		-webkit-border-radius: 15px;
+		-moz-border-radius: 15px;
+		border-radius: 25px;
+		border: 1p solid #999;
+		*/
+	}
+	
+	input#cancel
+	{
+		/*
+		width:100px;
+		position:absolute;
+		right:20px;
+		bottom:20px;
+		background:#09C;
+		color:#fff;
+		font-family: Tahoma, Geneva, sans-serif;
+		height:30px;
+		-webkit-border-radius: 15px;
+		-moz-border-radius: 15px;
+		border-radius: 25px;
+		border: 1p solid #999;
+		*/
+	}
+
+	
+	

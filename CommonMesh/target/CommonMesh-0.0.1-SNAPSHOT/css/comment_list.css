@@ -1,0 +1,29 @@
+
+.fullComment
+{
+	margin: 10px;
+}
+
+
+.message
+{
+	
+}
+
+.commentor
+{
+	font-weight: 600;
+	font-family: Verdana;
+	font-size: 12px;
+}
+ 
+.comment
+{
+	margin-left: 5px;
+}
+
+.commentTimeago
+{
+	font-style: italic;
+	font-size: 11px;
+}

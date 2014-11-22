@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  <display-name>CommonMesh</display-name>
+  <welcome-file-list>
+    <welcome-file>login.html</welcome-file>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <servlet-name>Jersey Servlet</servlet-name>
+    <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+    <!-- 
+    <init-param>
+      <param-name>com.sun.jersey.spi.container.ContainerRequestFilters</param-name>
+      <param-value>com.sun.jersey.api.container.filter.LoggingFilter;com.jpw.auth.UserAuthorizationFilter</param-value>
+    </init-param>
+    -->
+    
+   
+    <!-- Register my custom provider (not needed if it's in my.package) AND LoggingFilter. -->
+    
+        <init-param>
+            <param-name>jersey.config.server.provider.packages</param-name>
+            <param-value>com.jpw.ws</param-value>
+           <!-- <param-value>org.glassfish.jersey.filter.LoggingFilter;com.jpw.auth.UserAuthorizationFilter</param-value> -->
+        </init-param>
+        
+        <init-param>
+            <param-name>jersey.config.server.provider.classnames</param-name>
+            <param-value>com.jpw.auth.UserAuthorizationFilter;org.glassfish.jersey.filter.LoggingFilter</param-value>
+        </init-param>
+        
+        
+        <init-param>
+ 			<param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
+ 			<param-value>true</param-value>
+ 		</init-param>
+ 		
+        <asyncSupported>true</asyncSupported>
+ 		
+        <load-on-startup>1</load-on-startup>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>Jersey Servlet</servlet-name>
+    <url-pattern>/rest/*</url-pattern>
+  </servlet-mapping>
+  
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>Permitted Actions</web-resource-name>
+      <url-pattern>/*</url-pattern>
+      <http-method>GET</http-method>
+      <http-method>POST</http-method>
+      <http-method>PUT</http-method>
+      <http-method>DELETE</http-method>
+    </web-resource-collection>
+  </security-constraint>
+</web-app>

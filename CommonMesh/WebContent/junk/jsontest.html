@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame 
+       Remove this if you use the .htaccess -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>jsontest</title>
+  <meta name="description" content="">
+  <meta name="author" content="Joe">
+
+  <meta name="viewport" content="width=device-width; initial-scale=1.0">
+
+  <!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  <script src="C:/workspace/jquery-2.0.3.js"></script>
+  
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  
+  <script>
+  	function getEvent( ) 
+  	{
+	 	$.getJSON("http://localhost:8080/MyFirstREST/rest/event",
+	 	{ "_": $.now() },
+		function(data, status )
+		{
+		    alert("data loaded" + data);
+		    document.getElementById("status").innerHTML=status;
+		    document.getElementById("title").innerHTML=data.title;
+		    document.getElementById("desc").innerHTML=data.desc;
+		 });
+	}
+	</script>
+</head> 
+
+<body>
+	<h1>Get Event</h1>
+	<button type="button" onclick="getEvent()">Get Event</button>
+	<p id="status">status</p>
+	<p id="title">Title</p>
+	<p id="desc">Description</p>
+</body>
+</html>

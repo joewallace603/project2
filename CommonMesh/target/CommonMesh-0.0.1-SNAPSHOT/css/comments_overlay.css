@@ -1,0 +1,58 @@
+
+
+  	table.commentsTable
+  	{
+  		border-width: 0px;
+  	}
+  	tr.shadeComment
+  	{
+  		background-color:#C0C0C0;
+  		border-width: 0px;
+  	}
+  	td.commentor
+  	{
+  		text-align: left;
+  	    vertical-align:top;
+  		font-weight: 900;
+  		font-size: small;
+  		border-width: 0px;
+  	}
+  	span.commentTimeago
+  	{
+  		text-align: right;
+  		vertical-align: top;
+  		font-style:italic;
+  		font-size: small;
+  		font-weight: 900;
+  		white-space: nowrap;
+  		border-width: 0px;
+  	}
+ 
+  	td.comment
+  	{
+  		text-align: left;
+  		border-width: 0px;
+  	}
+  	
+  	tr.even
+  	{
+  		background-color:#F0f0f0;
+  	}
+  	
+		#textDiv
+		{
+			height: 90%;
+			background-color: #FFFFFF;
+			overflow: auto;
+		}
+		#commentsArea
+		{
+			width: 100%;
+			height: 100%;
+		}
+		
+		#commentClose
+		{
+			text-align:right;
+			display:block;
+		}

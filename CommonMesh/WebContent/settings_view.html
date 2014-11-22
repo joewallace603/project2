@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Settings</title>
+    <link rel="stylesheet" type="text/css" href="css/common_background.css">
+	<link rel="stylesheet" type="text/css" href="css/menu_bar.css">
+	<link rel="stylesheet" type="text/css" href="css/settings_view.css">
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+  	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.3.1/jquery.cookie.min.js"></script>
+  	<script src="http://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.7.0/mustache.min.js"></script>
+	<script src="js/global.js"></script>
+  	<script src="js/jquery-timeago.js"></script>
+  	
+	<script src="js/go-to-month-view.js"></script>
+	<script src="js/go-to-week-view.js"></script>
+	
+	<script>
+	$(document).ready( function( )
+  	{
+		$( ".settingsItem" ).click( function( )
+		{
+			alert( "This feature is comming soon!" );
+		});
+	});
+	</script>
+	
+</head>
+<body>
+	<div id='cssmenu'>
+				<ul>
+   					<li class="leftMenuBarItem" id="settings"><a title="Go to settings." id="settingsButton" onclick="goToSettingsView( )"><img id="settingsImage" src="img/config.bmp"></a></li>
+   					<li class="leftMenuBarItem"><img id="logo" src="img/commonmesh1.bmp"></li>
+   					 
+   					<li class="last rightMenuBarItem"><a onclick="goToWeekView( )"><span>Week</span></a></li>
+   					<li class="rightMenuBarItem"><a onclick="goToMonthView( )"><span>Month</span></a></li>
+   				</ul>
+	</div>
+	
+	<div id="settingsView">
+		<p id="pageTitle">Settings</p>
+		<br>
+		<p><a class="settingsItem" href="#"><span>    Change my password</span></a></p>
+		<br>
+		<p><a class="settingsItem" href="#"><span>Share my calander with another user</span></a></p>
+		<br>
+		<p><a class="settingsItem" href="#"><span>Edit my notification settings</span></a></p>
+		<br>
+		<p><a class="settingsItem" href="#"><span>Edit my profile</span></a></p>
+		<br>
+		<p><a class="settingsItem" href="#"><span>Mangage my contacts</span></a></p>
+		<br>
+	</div>
+</body>
+</html>

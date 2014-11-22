@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame 
+       Remove this if you use the .htaccess -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>Create Event</title>
+  <meta name="description" content="">
+  <meta name="author" content="Joe">
+
+  <meta name="viewport" content="width=device-width; initial-scale=1.0">
+
+  <!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="stylesheet" type="text/css" href="css/event_form.css">
+  <link rel="stylesheet" type="text/css" href="css/common_background.css">
+  <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+  
+  <link rel="stylesheet" type="text/css" href="css/datetimepicker.css" >
+  
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+  	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+  	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.3.1/jquery.cookie.min.js"></script>
+  	<script src="js/global.js"></script>
+  	<script src="js/datetimepicker.js"></script>
+  	<script src="http://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.7.0/mustache.min.js"></script>
+  	<script src="js/ajax-authorization-setup.js"></script>
+  	<script src="js/get-friends-html.js"></script>
+  	<script src="js/go-to-month-view.js"></script>
+  	<script src="js/get-contacts-check-box-list.js"></script>
+  	
+  	<script>
+  		$(function() { 
+  			$('#datetimepicker').datetimepicker( {timepicker:true} );
+  		});
+  	</script>
+
+	<script>
+   		$( document ).ready (function( )
+   		{
+   			//getContactsCheckBoxList( );
+   			
+	    	ajaxAuthorizationHeaderSetup( );
+	    	
+	    	var url = "rest/friends/" + $.cookie("username") ;
+		
+			$.getJSON(url, { "_": $.now() },
+				 		function( data, status )
+				  		{ 
+				  			var friendTemplate = $("#contactTemplate").html();
+				  	
+				  			for( var i = 0; i < data.length; i++ )
+				  			{
+				  				var friendHtml = Mustache.to_html( friendTemplate, data[i] );
+				  				$( "#contactList" ).append( friendHtml );
+				  			}
+				  			
+				  			var checkbox = document.getElementById( $.cookie("username") );
+							checkbox.setAttribute( "checked", "checked" );
+						}
+			);
+			
+   		});
+   	</script>
+
+	<script id="contactTemplate" type="text/template">
+		<div class="item">
+			<input type="checkbox" id="{{userId}}" value="{{userId}}">
+			
+			<label for="{{userId}}"><img id="userImage" src="img/{{imageName}}">{{firstName}} {{lastName}}</label>
+		</div>
+	</script>
+	
+	
+  
+  <script>
+  	function postEvent( )
+  	{
+  		newEvent = new Object( );
+  		
+  		var contactArray = $.map( $( "input:checkbox:checked" ), function( checkbox ,i ) 
+  		{
+    		return checkbox.value;
+		});
+
+  		console.log( contactArray );
+  		newEvent.invitedContacts = contactArray;
+  		
+  		newEvent.eventCreateDate = new Date( );
+  		newEvent.title = document.getElementById("title").value;
+  		newEvent.eventImageName = document.getElementById("imageName").value;
+  		var eventDate = new Date( document.getElementById( "datetimepicker").value );
+  		newEvent.eventDate = eventDate.getTime( );
+  		var duration = document.getElementById("duration");
+  		newEvent.eventDuration = duration.options[duration.selectedIndex].value;
+  		newEvent.location = document.getElementById("location").value;
+  		newEvent.description = document.getElementById("desc").value;
+  		newEvent.creatorId = $.cookie("username");
+  		
+  		var jsonString = JSON.stringify( newEvent );
+		
+  		jQuery.ajax ({
+			    url: "rest/events",
+			    type: "POST",
+			    data: JSON.stringify( newEvent ),
+			    contentType: "application/json; charset=utf-8",
+			    success: function( ){ goToMonthView( ); },
+			    error: function( jqXHR, textStatus, errorThrown ){ alert("Create Event Failed:  " + textStatus + ", " + errorThrown );}
+			    });
+  	}
+  	</script>
+  	
+</head>
+
+<body>
+
+<form id="eventForm" action="javascript:postEvent( )" >
+		<div>
+			<h2>Create Event</h2>
+			<div class="inputArea">
+				<div class="inputLabel">
+				Title
+				</div>
+				<input class="wideInput" id="title" type="text">
+			</div>
+			<div class="inputArea">
+				<div class="inputLabel">
+				Image
+				</div>
+				<input class="wideInput" id="imageName" type="text">
+			</div>
+			<div class="inputArea">
+				<div class="inputLabel">
+					Location
+				</div>
+				<input class="wideInput" id="location" type="text">
+			</div>
+			<div class="inputArea">
+				<div class="inputLabel">
+				Date
+				</div>
+				<input class="wideInput" id="datetimepicker" type="text">
+			</div>
+			<div class="inputArea">
+				<div class="inputLabel">
+				Duration
+				</div>
+				<select id="duration">
+					<option value="1" selected>1</option>
+					<option value="2">2</option>
+					<option value="3" >3</option>
+					<option value="4" >4</option>
+					<option value="5" >5</option>
+					<option value="6" >6</option>
+					<option value="7" >7</option>
+					<option value="8" >8</option>
+				</select>
+			</div>
+			<div class="inputArea" id="descArea">
+				<div class="inputLabel">
+				Description
+				</div>
+				<textarea class="wideInput" id="desc"></textarea>
+			</div>
+			<div class="inputArea" id="contactsArea">
+				
+				<div class="inputLabel">
+				Invite Contacts
+				</div>
+				<fieldset id="contactList">
+				</fieldset>
+			</div>
+			<div id="buttons">
+				<div id="submit">
+					<input type="submit" value="Save" id="create">
+				</div>
+				<div id="cancelArea">
+					<input type="button" id="cancel" value="Cancel" onclick="history.go(-1)">
+				</div>
+			</div>
+		</div>
+	</form>
+</body>
+</html>

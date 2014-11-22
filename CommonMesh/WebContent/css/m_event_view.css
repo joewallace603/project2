@@ -1,0 +1,64 @@
+.ui-btn-active
+{
+	color: #396b9e !important;
+	background: none !important;
+	background-color: white !important;
+	border-bottom: none;
+}
+
+#mImage
+		{
+			width: 100px;
+			height: 100px;
+			border-width: 20px;
+			border-style: solid;
+			border-radius: 5px;
+		}
+
+
+.footerLeftIcon
+{
+	display: inline;
+}
+
+.footerRightIcon
+{
+	float: right;
+}
+
+
+#eventDetailContent
+{
+	text-align: center;
+}
+
+#statusLine
+{
+	white-space: pre-wrap;
+	text-decoration: none;
+}
+
+a
+{
+	text-decoration: none !important;
+}
+
+a:link
+{
+	color: black;
+}
+a:visited
+{
+	color: black;
+}
+a:hover
+{
+	color: black !important;
+}
+a:active
+{
+	color: black;
+}
+
+
+

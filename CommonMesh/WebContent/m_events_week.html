@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Week</title>
+
+<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
+	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.2/jquery.mobile.css" />
+	<link rel="stylesheet" href="http://demos.jquerymobile.com/1.4.0/theme-classic/theme-classic.css" />
+	<link rel="stylesheet" href="css/common_background.css"/>
+	<link rel="stylesheet" href="css/m_events_week.css"/>
+	
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+	<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.2/jquery.mobile.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.3.1/jquery.cookie.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.7.0/mustache.min.js"></script>
+	<script src="js/global.js"></script>
+	<script src="js/ajax-authorization-setup.js"></script>
+	<script src="js/detectmobilebrowser.js"></script>
+    <script src="js/fastclick.js"></script>
+    <script src="js/handle-time-location-change.js"></script>
+    <script src="js/get-url-param-value.js"></script>
+    <script src="js/get-event-by-id.js"></script>
+    <script src="js/get-day-of-week.js"></script>
+    <script src="js/get-user-event-status-color.js"></script>
+    <script src="js/get-events-for-week.js"></script>
+    <script src="js/insert-events-into-week-view.js"></script>
+    
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    
+    <script>
+    	$( document ).ready( function( )
+    	{
+    		alert( "starting week view");
+    		ajaxAuthorizationHeaderSetup( );
+    		alert( "ajax setup");
+    		alert("about to call get events for week");
+    		
+    		getEventsForWeek( );
+    		
+    	});
+    	
+    	
+    	
+    	function shiftWeek( increment )
+    	{
+    		var weekMarker = $.cookie("weekMarker" );
+
+			if( weekMarker == null )
+			{
+		    	var today = new Date( );
+		    	weekMarker = today.getTime( );
+		    	$.cookie( "weekMarker", weekMarker, {path: '/'} );
+			}
+			
+			var millisInWeek = 1000 * 60 * 60 * 24 * 7;
+			
+			if( increment )
+			{
+				weekMarker += millisInWeek;
+			}
+			else
+			{
+				weekMarker -= millisInWeek;
+			}
+			
+			getEventsForWeek( );
+    	}
+    	
+    </script>
+    
+</head>
+<body>
+	
+<div data-role="page" id="weekView">
+  <div data-role="main" class="ui-content">
+  	<div data-role="header" data-id="eventHeader" data-position="fixed">
+  		<a href="#" class="ui-btn ui-shadow ui-corner-all ui-icon-bars ui-btn-icon-notext ui-nodisc-icon"></a>
+		<h1>CommonMesh</h1>
+		<a href="#" class="ui-btn ui-shadow ui-corner-all ui-icon-plus ui-btn-icon-notext ui-nodisc-icon"></a>
+	</div>
+    <ul data-role="listview" data-inset="true">
+      <li class="ui-mini" data-role="divider">
+          <h3>Sunday June 29</h3>
+      </li>
+      
+      
+      <li class="ui-mini" data-role="divider">
+          <h3>Monday June 30</h3>
+      </li>
+      <li class="ui-mini" data-role="divider">
+          <h3>Tuesday July 1</h3>
+      </li>
+      <li>
+        <a href="#" class="noResponse">
+            <img class="weekEventImage" src="img/fabio.bmp">
+            <h2>Dinner with Fabio</h2>
+            <p class="weekTime ui-mini">1:00 PM at Flatbread</p>
+        </a>  
+      </li>
+      <li>
+        <a href="#" class="going">
+            <img class="weekEventImage" src="img/mslb.bmp">
+            <h2>Sam Basketball</h2>
+            <p class="weekTime ui-mini">6:00 PM at St. Patrick's Gym</p>
+        </a>  
+      </li>
+      
+      <li class="ui-mini" data-role="divider">
+          <h3>Wednesday July 2</h3>
+      </li>   
+      <li class="ui-mini" data-role="divider">
+          <h3>Thursday July 3</h3>
+      </li>          
+      <li class="ui-mini" data-role="divider">
+          <h3>Firday July 4</h3>
+      </li>        
+      <li>
+      	
+        <a href="#" class="notGoing">
+            <img class="weekEventImage" src="img/spin.bmp">
+            <h2>Spin Class</h2>
+            <p class="weekTime ui-mini">6:00 AM at Merrimack YMCA</p>
+        </a>  
+      </li>  
+      <li>
+        <a href="#" class="maybe">
+            <img class="weekEventImage" src="img/lake.bmp">
+            <h2>July 4th Party</h2>
+            <p class="weekTime ui-mini">1:00 PM at The lake</p>
+            <!--
+            <div class="weekEventStatus ui-grid-d">
+                <div class="going ui-block-a"><p>Going 25</p></div>
+                <div class="maybe ui-block-b"><p>Maybe 25</p></div>
+                <div class="notGoing ui-block-c"><p>Not Going 25</p></div>
+                <div class="noResponse ui-block-d"><p>No Response 25</p></div>
+                <div class="comments ui-block-e"><p>Comments 25</p></div>
+            </div>
+            -->
+        </a>       
+      </li>
+      <li class="ui-mini" data-role="divider">
+          <h3>Saturday July 5</h3>
+      </li> 
+          
+      
+    </ul>
+  </div>
+  		<div data-role="footer" data-position="fixed" data-id="eventFooter">
+		
+			<div class="footerLeftIcon">
+				<a onclick="shiftWeek( false )" class="ui-btn ui-shadow ui-corner-all ui-icon-carat-l ui-btn-icon-left">Previous Week</a>
+			</div>
+			<div class="footerRightIcon">
+				<a onclick="shiftWeek( true )" class="ui-btn ui-shadow ui-corner-all ui-icon-carat-r ui-btn-icon-right">Next Week</a>
+			</div>
+		</div>
+</div> 
+
+
+
+</body>
+</html>

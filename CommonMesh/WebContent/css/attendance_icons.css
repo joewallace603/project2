@@ -1,0 +1,38 @@
+
+
+    .roundInvited
+    {
+        -moz-border-radius: 50%;
+        border-radius: 50%;
+        padding: 5px;
+       /* background-image: linear-gradient(to top, #9BFF61 0%, #6699FF 100%);*/
+    }
+
+	.roundGoing
+    {
+        -moz-border-radius: 50%;
+        border-radius: 50%;
+        padding: 5px;
+    }
+
+	.roundMaybe
+    {
+        -moz-border-radius: 50%;
+        border-radius: 50%;
+        padding: 5px;
+    }
+
+	.roundOut
+    {
+        -moz-border-radius: 50%;
+        border-radius: 50%;
+        padding: 5px;
+    }
+
+	.squareComment
+    {
+        -moz-border-radius: 50%;
+        border-radius: 50%;
+        padding: 5px;
+        background-color:white;
+    }

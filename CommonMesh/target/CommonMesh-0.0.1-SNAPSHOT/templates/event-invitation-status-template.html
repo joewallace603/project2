@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+
+	<script id="inviteeTemplate" type="text/template">
+		<li>
+			<div class="invitee">
+		    	<img class="inviteeImage" src="img/{{imageName}}">
+		        <p class="inviteeName">{{firstName}} {{lastName}}</p>
+		    </div>
+		</li>
+	</script>
+	
+	<script id="eventInvitationStatusTemplate" type="text/template">
+		<div id="tabs">
+		    <ul>
+		        <li><a href="#accepted">Accepted ({{going.length}})</a></li>
+		        <li><a href="#tentative">Tentative ({{tentative.length}})</a></li>
+		        <li><a href="#declined">Declined ({{declined.length}})</a></li>
+		        <li><a href="#noResponse">No Response ({{hasNotResponded.length}})</a></li>
+		    </ul>
+		    <div id="accepted">
+		        <ul id="acceptedList" class="invitationList">
+		        </ul>
+		    </div>
+		    <div id="tentative">
+		    	<ul id="tentativeList" class="invitationList">
+		    	</ul>
+		    </div>
+		    <div id="declined">
+		    	<ul id="declinedList" class="invitationList">
+		    	</ul>
+		    </div>
+		    <div id="noResponse">
+		    	<ul id="noResponseList" class="invitationList">
+		    	</ul>
+		    </div>
+		</div>
+		<div id="close">
+			<a id="closeLink" href="#">close</a>
+		</div>
+			
+	</script>
+</head>
+<body>
+
+</body>
+</html>

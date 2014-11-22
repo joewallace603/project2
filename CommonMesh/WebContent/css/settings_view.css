@@ -1,0 +1,30 @@
+
+	#settingsView
+	{
+			height:575px;
+			width:960px;
+			margin:auto;
+			margin-top: 25px;
+			border-radius: 5px;
+			border-style: solid;
+			border-width: 1px;
+			border-color: #D8D8D8;
+			background-color:white;
+			font-size: 14px;
+	}
+	
+	.settingsItem span
+	{
+		margin: 50px;
+		/*padding: 50px;*/
+	}
+	
+		a:link {text-decoration:none;}
+ 		a:visited {text-decoration:none;}
+ 		a:hover {text-decoration:none;}
+ 		a:active {text-decoration:none;}
+ 		
+ 		a:link {color:black;}
+ 		a:visited {color:black;}
+ 		a:hover {color:black;}
+ 		a:active {color:black;}

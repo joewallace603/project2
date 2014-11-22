@@ -1,0 +1,103 @@
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
+@charset 'UTF-8';
+
+body 
+  	{
+  		/*background-image: linear-gradient(to Left, #9BFF61 0%, #6699FF 100%);*/
+  		/*ckground-color: #f0f0f0;*/
+  		/*font-family: 'Lato', sans-serif;*/
+  		font-family: Verdana;
+	}
+	
+	/**************************** Colors ****************************/
+	.none
+	{
+		background:#d6d6d6;
+		border-color: #d6d6d6;
+		background-color:#d6d6d6;
+	}
+	.blue
+	{
+		background:#0033ff !important;
+		border-color: #0033ff;
+		background-color:#0033ff;
+		color: white !important;
+	}
+	.red
+	{
+		background:#ff454b !important;
+		border-color: #ff454b;
+		background-color:#ff454b;
+		color: white !important;
+	}
+	.yellow
+	{
+		background: #ffff00 !important;
+		border-color: #ffff00;
+		background-color:#ffff00;
+		color: black !important ;
+	}
+	.green
+	{
+		background:#00cc66 !important;
+		border-color: #00cc66;
+		background-color: #00CC66;
+		/*border-width: 10px;  this was for mobile but to big for desktop */
+		border-style: solid;
+		color: white !important;
+	}
+	.gray
+	{
+		background:#909090 !important;
+		border-color: #909090;
+		background-color:#909090 !important;
+	}
+	
+	form
+	{
+		border-radius: 5px;
+		border: 1px solid #d8d8d8;
+	}
+	
+	input
+	{
+		border: 1px solid #D8D8D8;
+	}
+	
+	.button
+	{
+		width:100px;
+		background:#6AA3FF;
+		color:#fff;
+		height:30px;
+		-webkit-border-radius: 5px;
+		-moz-border-radius: 5px;
+		border-radius: 5px;
+		border: 1px solid #d8d8d8;
+	}
+	
+	p#pageTitle
+	{
+		text-align: center;
+		color: #6AA3FF;
+		font-size: 30px;
+		margin: 10px 5px 20px;
+		font-weight: 900;
+	}
+	
+	#close
+	{
+		font-size: 20px;
+		margin: 10px;
+		color: black;
+	}
+	
+.footerLeftIcon
+{
+	display: inline;
+}
+
+.footerRightIcon
+{
+	float: right;
+}

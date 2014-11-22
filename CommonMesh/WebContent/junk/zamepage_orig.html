@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame 
+       Remove this if you use the .htaccess -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>Application Landing Page</title>
+  <meta name="description" content="">
+  <meta name="author" content="Joe">
+
+  <meta name="viewport" content="width=device-width; initial-scale=1.0">
+
+  <!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<style type="text/css">
+  	body 
+  	{
+  		background-image: linear-gradient(to top, #9BFF61 0%, #6699FF 100%);
+	}
+  	
+  	#leftArrow
+  	{
+  		float:left;
+  	}
+  	
+  	#weekTablex
+  	{
+  		margin-left: auto;
+  		margin-right: auto;
+  		border:0px solid black;
+  		border-collapse:collapse;
+ 		background-image: linear-gradient(to top, #9BFF61 0%, #6699FF 100%);
+  		
+  	}
+  	
+  	td.dayOfWeek
+  	{
+  		border:1px solid black;
+  		padding:10px 10px 10px 10px;
+  	}
+  	
+  	#weekTable th
+  	{
+  		border:1px solid black;
+  		padding:10px 10px 10px 10px;
+  	}
+  	
+  	.weekData
+  	{
+  	
+  		border:1px solid black;
+  		padding:0px 0px 0px 0px;
+  	}
+  	
+  	.dayData
+  	{
+  		border:1px solid #c0c0c0;
+  	}
+  	
+  	table.eventTable
+  	{
+  		background-image: linear-gradient(to right, #FF5226 0%, #DCE65A 100%);
+  		border:1px solid #FFFFFF;
+  	}
+  	
+  	td.eventTable
+  	{
+  		padding:1px 10px 1px 10px;
+  	}
+  	
+  	td.eventTableComment
+  	{
+  		text-align: left;
+  		text-align: top;
+  		padding:1px 10px 1px 10px;
+  	}
+  	
+  	.eventTableTitle
+  	{
+  		text-align: center;
+  		padding:1px 20px 1px 20px;
+  		
+  	}
+  	
+  	td.eventResponseTable
+  	{
+  		border:0px solid #c0c0c0;
+  		padding:1px 1px 1px 1px;
+  	}
+  	
+  	tr.alternate, td.alternate
+  	{
+  		background-color: #f8f8f8;
+  	}
+  	
+  	a.respondLink
+  	{
+  		color:#0000ff;
+  	}
+  	
+  	td.statusTable
+  	{
+  		padding:1px 10px 1px 10px;
+  	}
+  	
+  	td.statusImage
+  	{
+  		text-align: center;
+  	}
+  	
+  	a:link 
+  	{
+  		text-decoration:none;
+  		color:#000000; 
+  	}   
+  	
+  	a:hover
+  	{
+  		text-decoration:underline;
+  		color:#000000;
+  	}
+  	  	
+    a:visited 
+    {
+    	text-decoration:none;
+    	color:#000000;
+    } 
+    
+    a.respondLink
+  	{
+  		color:#0000ff;
+  	}
+  	
+	tr.today
+	{
+		background-image: linear-gradient(to top, #A889A7 0%, #FFFFFF 100%);
+	}
+
+ 	/*  New navigatin bar */
+  	#navcontainer ul
+	 {
+		 margin: 0;
+		 padding: 0;
+		 list-style-type: none;
+		 text-align: center;
+	 }
+	
+	 #navcontainer ul li 
+	 { 
+	 	display: inline; 
+	 }
+	
+	 #navcontainer ul li a
+	 {
+		 text-decoration: none;
+		 padding: .2em 1em;
+		 color: #fff;
+		 background-color: #3333ff;
+	 }
+	
+	 #navcontainer ul li a:hover
+	 {
+		 color: #fff;
+		 background-color: #3300cc;
+	 }
+
+  </style>
+  
+  <script id="eventTableTemplate" type="text/template">
+	<table class="eventTable">
+		<tr>
+			<td rowspan="3">
+				<a target="_blank" title="Enlarge picture" href="file:///C:/apps/images/bike_team.bmp">
+					<img border="0" src="C:/apps/images/bike_team.bmp" alt="event image" width="75" height="75">
+				</a>
+			</td>
+			<td class="eventTableTitle" colspan="3" title="{{desc}}">
+				<a href="file:///C:/workspace/MyFirstWebProject/a_event_view.html">{{title}}</a>
+			</td>
+			<td class="eventResponseTable" rowspan="3">
+				<table class="responseTable">
+			    	<tr>
+			    		<td colspan="2" class="statusImage">
+			    			<img src="C:/apps/images/have_not_responded.bmp" alt="status image" width="30" height="30" title="You have not responded to this invitation.">
+			    		</td>
+			    	</tr>
+			    	<tr>
+			    		<td colspan="2">
+			    			<a class="respondLink" href="file:///c:/workspace/MyFirstWebProject/a_event_view.html">respond</a>
+			    		</td>
+			    	</tr>
+			    	<tr>
+			    		<td>
+			    			<img src="C:/apps/images/reminder_na.bmp" alt="status image" width="20" height="20" title="No reminder is set.">
+			    		</td>
+			    		<td>
+			    			<img src="C:/apps/images/delete.bmp" alt="status image" width="10" height="10" title="Delete this event.">
+			    		</td>
+			    	</tr>
+			    </table>
+			</td>
+		</tr>
+		<tr>
+			<td class="eventTable">
+				<a href="file:///c:/workspace/MyFirstWebProject/a_event_view.html" title="View comments"><small><b>{{numberOfComments}} comments</b></small></a>
+			</td>
+			<td class="eventTable">
+				<a href="file:///c:/workspace/MyFirstWebProject/a_event_view.html" title="{{going}}"><small><b>{{going.length}} going</b></small></a>
+			</td>
+			<td>
+				<a href="file:///c:/workspace/MyFirstWebProject/a_event_view.html" title="{{invited}}"><small><b>{{invited.length}} invited</b></small></a>
+			</td>
+		</tr>
+		<tr>
+			<td class="eventTableComment" colspan="3">
+				<textarea rows="1" cols="40" placeholder="Make a comment...">Make a comment...
+				</textarea>
+			</td>
+		</tr>
+	</table>
+</script>
+
+  
+  <script src="C:/workspace/jquery-2.0.3.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.7.0/mustache.min.js"></script>
+  
+  <script>
+  	
+	 	$.getJSON("http://localhost:8080/MyFirstREST/rest/events",
+	 	{ "_": $.now() },
+		function(data, status )
+		{
+		   // alert("data loaded" + data);
+		   
+		   var weekday=new Array(7);
+				weekday[0]="sunday";
+				weekday[1]="sonday";
+				weekday[2]="tuesday";
+				weekday[3]="wednesday";
+				weekday[4]="thursday";
+				weekday[5]="friday";
+				weekday[6]="saturday";
+
+		    
+		    var template = $('#eventTableTemplate').html();
+		    
+		    for( var i = 0; i < data.length; i++ )
+		    {
+		        var myhtml = Mustache.to_html(template, data[i]);
+		        var day = new Date(data[i].date).getDay();
+		        $( "#" + weekday[day] + "Events").append( myhtml );
+		    }
+		 });
+	</script>
+
+
+	
+
+
+</head>
+
+<body>
+	<div id="navcontainer">
+ 		<ul>
+ 			<li><a href="#">Month</a></li>
+ 			<li><a href="#">Week</a></li>
+ 			<li><a href="#">Day</a></li>
+ 			<li><a href="#">&#60</a></li>
+ 			<li><a href="#">&#62</a></li>
+ 			<li><a href="#">+</a></li>
+ 		</ul>
+ 	</div> 
+	<br>
+	<br>
+    <table id="weekTable">
+    	<tr>
+    		<td class="dayOfWeek"><a title="Weather.com" target="_blank" href="http://www.weather.com/weather/tenday/Merrimack+NH+03054:4:US" alt="weather image"><img border="0" src="/img/weather_sun.bmp" height="75" width="200"></a></td>
+    		<td id="sunday" class="weekData">
+			</td>
+		</tr>
+		<tr id="monday">
+			<td class="dayOfWeek"><a title="Weather.com" target="_blank" href="http://www.weather.com/weather/tenday/Merrimack+NH+03054:4:US" alt="weather image"><img border="0" src="C:/apps/images/weather_mon.bmp" height="75" width="200"></a></td>
+			<td id="mondayEvents" class="weekData">
+			</td>
+		</tr>
+		<tr id="tuesday">
+			<td class="dayOfWeek"><a title="Weather.com" target="_blank" href="http://www.weather.com/weather/tenday/Merrimack+NH+03054:4:US" alt="weather image"><img border="0" src="C:/apps/images/weather_tue.bmp" height="75" width="200"></a></td>
+			<td id="tuesdayEvents" class="weekData">
+			</td>
+		</tr>
+		<tr id="wednesday">
+			<td class="dayOfWeek"><a title="Weather.com" target="_blank" href="http://www.weather.com/weather/tenday/Merrimack+NH+03054:4:US" alt="weather image"><img border="0" src="C:/apps/images/weather_wed.bmp" height="75" width="200"></a></td>
+			<td id="wednesdayEvents" class="weekData">
+			</td>
+		</tr>
+		<tr id="thursday">
+			<td class="dayOfWeek"><a title="Weather.com" target="_blank" href="http://www.weather.com/weather/tenday/Merrimack+NH+03054:4:US" alt="weather image"><img border="0" src="C:/apps/images/weather_thur.bmp" height="75" width="200"></a></td>
+			<td id="thursdayEvents" class="weekData">
+			</td>
+		</tr>
+		<tr id="friday">
+			<td class="dayOfWeek"><a title="Weather.com" target="_blank" href="http://www.weather.com/weather/tenday/Merrimack+NH+03054:4:US" alt="weather image"><img border="0" src="C:/apps/images/weather_fri.bmp" height="75" width="200"></a></td>
+			<td id="fridayEvents" class="weekData">
+			</td>
+		</tr>
+		<tr id="saturday">
+			<td class="dayOfWeek"><a title="Weather.com" target="_blank" href="http://www.weather.com/weather/tenday/Merrimack+NH+03054:4:US" alt="weather image"><img border="0" src="C:/apps/images/weather_sat.bmp" height="75" width="200"></a></td>
+			<td id="saturdayEvents" class="weekData">
+			</td>
+		</tr>
+	</table>
+	
+		<script>
+			   var weekday=new Array(7);
+				weekday[0]="sunday";
+				weekday[1]="monday";
+				weekday[2]="tuesday";
+				weekday[3]="wednesday";
+				weekday[4]="thursday";
+				weekday[5]="friday";
+				weekday[6]="saturday";
+		var today = new Date().getDay();
+		//alert( weekday[today] );
+	//	alert( "#" + weekday[today] );
+		
+	$( "#" + weekday[today] ).css( "background-image", "linear-gradient(to top, #A889A7 0%, #FFFFFF 100%)" );
+	// $( "#" + weekday[today] ).css( "background-color", "yellow" );
+	 //alert( $( "#weekTable" ).css("background-color") );
+	</script>
+</body>
+</html>

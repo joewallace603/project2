@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+
+	<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
+	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.2/jquery.mobile.css" />
+	<link rel="stylesheet" href="http://demos.jquerymobile.com/1.4.0/theme-classic/theme-classic.css" />
+	<link rel="stylesheet" href="css/common_background.css"/>
+	<link rel="stylesheet" href="css/m_event_view.css"/>
+	
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+	<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.2/jquery.mobile.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.3.1/jquery.cookie.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.7.0/mustache.min.js"></script>
+	<script src="js/global.js"></script>
+	<script src="js/ajax-authorization-setup.js"></script>
+	<script src="js/detectmobilebrowser.js"></script>
+    <script src="js/fastclick.js"></script>
+    <script src="js/handle-time-location-change.js"></script>
+    <script src="js/get-url-param-value.js"></script>
+    <script src="js/get-event-by-id.js"></script>
+    <script src="js/get-day-of-week.js"></script>
+    <script src="js/get-user-event-status-color.js"></script>
+    <script src="js/set-user-status-check-on-buttons.js"></script>
+	
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+	
+	<script>
+		$(document).on('pageinit', function() {
+
+
+			$("#eventDetails").on("swipeleft", function( )
+						{
+							alert("details swipe to status");
+							$.mobile.changePage( "#eventStatus", {transition:  "slideleft" });
+						});
+
+			$("#eventStatus").on("swiperight", function( )
+						{
+							alert("status swipe to details" );
+							$.mobile.changePage( "#eventDetails", {transition:  "slideright" });
+						});
+			$("#eventStatus").on("swipeleft", function( )
+						{
+							alert( "status swipe to comments");
+							$.mobile.changePage( "#eventComments", {transition:  "slideleft" });
+						});
+			$("#eventComments").on("swiperight", function( )
+						{
+							alert( "comments swip to status");
+							$.mobile.changePage( "#eventStatus", {transition:  "slideright" });
+						});
+		});
+	</script>
+	
+	<script>
+	$(document).ready( function( )
+  		{
+  			$( ".nextTimeRange" ).click( function( )
+  			{
+  				var url = "rest/events/next/" + eventId + "/" + $.cookie( "username" );
+  				getEventById( url );
+  			});
+	    
+	    	$( ".previousTimeRange" ).click( function( )
+	    	{
+	    		var url = "rest/events/previous/" + eventId + "/" + $.cookie( "username" );
+  				getEventById( url );
+	    	});
+	    	
+	    	
+  		});
+  		
+  		$(document).on( "pageinit", function()
+  		{
+  			eventId = getURLParamValue( "eventid" );
+  			
+  			ajaxAuthorizationHeaderSetup( );
+  			
+  			var url = "rest/events/" + eventId + "/" + $.cookie( "username" );
+  			
+  			getEventById( url );
+  		});
+  		
+	</script>
+	
+</head>
+<body>
+	<div data-role="page" id="eventDetails" data-theme="b">
+		<div data-role="header" data-id="eventHeader" data-position="fixed">
+			<a href="#" class="ui-btn ui-shadow ui-corner-all ui-icon-bars ui-btn-icon-notext ui-nodisc-icon"></a>
+			<h1>CommonMesh</h1>
+			<a href="#" class="ui-btn ui-shadow ui-corner-all ui-icon-edit ui-btn-icon-notext ui-nodisc-icon"></a>
+			<div data-role="navbar">
+				<ul>
+					<li><a href="#" class="ui-btn-active ui-state-persist">Details</a></li>
+					<li><a href="#eventStatus">Status</a></li>
+					<li><a href="#eventComments">Comments</a></li>
+				</ul>
+			</div>
+		</div>
+		<div data-role="content" id="eventDetailContent">
+	
+			<h1 id="title"></h1>
+		
+			<div id="responseButtons" data-role="controlgroup" data-type="horizontal" data-mini="true">
+				<a id="goingButton" href="javascript:respondToInvitationRefreshStatusIcons( )" data-role="button">I'm going</a>
+				<a id="declinedButton" href="javascript:respondToInvitationRefreshStatusIcons( )" data-role="button">I'm not going</a>
+				<a id="tentativeButton" href="javascript:respondToInvitationRefreshStatusIcons( )" data-role="button">Maybe</a>
+			</div>
+			<div id="eventDetail">
+			
+			</div>
+		</div>
+		<div data-role="footer" data-position="fixed" data-id="eventFooter">
+		
+			<div class="footerLeftIcon">
+				<a href="#" id="previousTimeRange" class="previousTimeRange ui-btn ui-shadow ui-corner-all ui-icon-arrow-l ui-btn-icon-left">Previous Event</a>
+			</div>
+			<div class="footerRightIcon">
+				<a href="#" id="nextTimeRange" class="nextTimeRange ui-btn ui-shadow ui-corner-all ui-icon-arrow-r ui-btn-icon-right">Next Event</a>
+			</div>
+		</div>
+	</div>
+	<div data-role="page" id="eventStatus" data-theme="b">
+		<div data-role="header" data-id="eventHeader" data-position="fixed">
+			<a href="#" class="ui-btn ui-shadow ui-corner-all ui-icon-bars ui-btn-icon-notext ui-nodisc-icon"></a>
+			<h1>CommonMesh</h1>
+			<a href="#" class="ui-btn ui-shadow ui-corner-all ui-icon-edit ui-btn-icon-notext ui-nodisc-icon"></a>
+			<div data-role="navbar">
+				<ul>
+					<li><a href="#eventDetails">Details</a></li>
+					<li><a href="#" class="ui-btn-active ui-state-persist">Status</a></li>
+					<li><a href="#eventComments">Comments</a></li>
+				</ul>
+			</div>
+		</div>
+		<div data-role="content">
+		<h1> Event status goes here...</h1>
+		</div>
+		<div data-role="footer" data-position="fixed" data-id="eventFooter">
+		
+			<div class="footerLeftIcon">
+				<a href="#" class="ui-btn ui-shadow ui-corner-all ui-icon-arrow-l ui-btn-icon-left">Previous Event</a>
+			</div>
+			<div class="footerRightIcon">
+				<a href="#" class="ui-btn ui-shadow ui-corner-all ui-icon-arrow-r ui-btn-icon-right">Next Event</a>
+			</div>
+		</div>
+		
+	</div>
+	<div data-role="page" id="eventComments" data-theme="b">
+		<div data-role="header" data-id="eventHeader" data-position="fixed">
+			<a href="#" class="ui-btn ui-shadow ui-corner-all ui-icon-bars ui-btn-icon-notext ui-nodisc-icon"></a>
+			<h1>CommonMesh</h1>
+			<a href="#" class="ui-btn ui-shadow ui-corner-all ui-icon-edit ui-btn-icon-notext ui-nodisc-icon"></a>
+			<div data-role="navbar">
+				<ul>
+					<li><a href="#eventDetails" >Details</a></li>
+					<li><a href="#eventStatus">Status</a></li>
+					<li><a href="#" class="ui-btn-active ui-state-persist">Comments</a></li>
+				</ul>
+			</div>
+		</div>
+		<div data-role="content">
+		
+		<div class="fullComment" id="{{userId}}">
+  		<div class="message">
+  			<span class="commentor">John Doe </span>
+  			<span class="comment">what's up dude?</span>
+  		</div>
+  		<div class="commentTimeago">2 days ago.
+  		</div>
+  	</div>
+  	<div class="fullComment" id="{{userId}}">
+  		<div class="message">
+  			<span class="commentor">Rick Smith </span>
+  			<span class="comment">Let's eat</span>
+  		</div>
+  		<div class="commentTimeago">1 day ago
+  		</div>
+  	</div>
+  	<div class="fullComment" id="{{userId}}">
+  		<div class="message">
+  			<span class="commentor">Jane Doe </span>
+  			<span class="comment">What are you cooking</span>
+  		</div>
+  		<div class="commentTimeago">1 hour agod
+  		</div>
+  	</div>
+  	<div id="postComment" onKeyPress="return checkForCommentSubmit( event )">
+			<form id="commentText" name="comments" action="javascript:createComment({{eventId}})">
+				<input type="text" class="commentPostBox" id ="commentText{{eventId}}" placeholder="Share a thought?">
+			</form>
+		</div>
+		
+		</div>
+		<div data-role="footer" data-position="fixed" data-id="eventFooter">
+		
+			<div class="footerLeftIcon">
+				<a href="#" class="ui-btn ui-shadow ui-corner-all ui-icon-arrow-l ui-btn-icon-left">Previous Event</a>
+			</div>
+			<div class="footerRightIcon">
+				<a href="#" class="ui-btn ui-shadow ui-corner-all ui-icon-arrow-r ui-btn-icon-right">Next Event</a>
+			</div>
+		</div>
+		
+	</div>
+
+</body>
+</html>

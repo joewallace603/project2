@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+
+<script id="mEventDetailsTemplate" type="text/template">
+					
+			<img class="{{color}}" id="mImage" src="img/{{eventImageName}}">
+			<p>{{dayOfWeek}} {{displayDate}}</p>
+			<p>{{location}}</p>
+			<p>{{description}}</p>
+		
+			<a id="statusLine" href="#eventStatus"><span>Going {{clientEventInvitationList.going.length}}     Not going {{clientEventInvitationList.declined.length}}     Maybe {{clientEventInvitationList.tentative.length}}     No response {{clientEventInvitationList.hasNotResponded.length}}</span></a>
+	</script>
+
+</head>
+<body>
+
+</body>
+</html>

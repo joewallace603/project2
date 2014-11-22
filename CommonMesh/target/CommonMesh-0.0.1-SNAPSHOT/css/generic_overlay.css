@@ -1,0 +1,34 @@
+
+		#overlay
+		{
+			display: none; /* invisible until it's called */
+			position: absolute; /* position that is obsolute to browser viewing area */
+			left: 10%; /* position div halfway horiz */
+			top: 5%;  /* position div halfway vert */
+		/*	padding: 25px; */
+			/*border: 2px solid black;
+			background-image:linear-gradient(to top, #9BFF61 0%, #6699FF 100%);*/
+			background-color: white;
+			width: 80%;
+			height: 90%;
+			/*width: 600px;
+			height: 700px;
+			margin: auto; */
+			z-index: 100; /* makes the div the top layer */
+			overflow: auto;
+			border-radius: 5px;
+		}
+		
+		#fade
+		{
+			display: none; /* invisible until called */
+			position: absolute;
+			left: 0%;
+			top: 0%;
+			background-color: black;
+			-moz-opacity: 0.7; /*makes div transparent */
+			opacity: .70;
+			width: 100%;
+			height: 100%;
+			z-index: 90;  /*makes the div the second most top layer */
+		}
